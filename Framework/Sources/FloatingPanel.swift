@@ -233,11 +233,13 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate {
         }
     }
 
+    var customGrabberAreaHeight: CGFloat?
+    
     var grabberAreaFrame: CGRect {
         let grabberAreaFrame = CGRect(x: surfaceView.bounds.origin.x,
                                      y: surfaceView.bounds.origin.y,
                                      width: surfaceView.bounds.width,
-                                     height: surfaceView.topGrabberBarHeight * 2)
+                                     height: customGrabberAreaHeight ?? surfaceView.topGrabberBarHeight * 2)
         return grabberAreaFrame
     }
 

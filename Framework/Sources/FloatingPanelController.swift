@@ -120,6 +120,22 @@ open class FloatingPanelController: UIViewController, UIScrollViewDelegate, UIGe
     public var layout: FloatingPanelLayout {
         return floatingPanel.layoutAdapter.layout
     }
+    
+    /// The height of the grabber area.
+    ///
+    /// (*) Pan gestures in this area will always drag the panel,
+    ///     rather than the scrollView contained in the panel.
+    ///
+    /// (*) Tap gestures in this area will still pass through
+    ///     to the scrollView's content.
+    ///
+    public var customGrabberAreaHeight: CGFloat? {
+        get {
+            return floatingPanel.customGrabberAreaHeight
+        } set {
+            floatingPanel.customGrabberAreaHeight = newValue
+        }
+    }
 
     /// The behavior object managed by the controller
     public var behavior: FloatingPanelBehavior {
