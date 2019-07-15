@@ -67,7 +67,14 @@ public protocol FloatingPanelBehavior {
 
 public extension FloatingPanelBehavior {
     func shouldProjectMomentum(_ fpc: FloatingPanelController, for proposedTargetPosition: FloatingPanelPosition) -> Bool {
-        return false
+        switch (fpc.position, proposedTargetPosition) {
+        case (.full, .tip):
+            return false
+        case (.tip,  .full):
+            return false
+        default:
+            return true
+        }
     }
 
     func momentumProjectionRate(_ fpc: FloatingPanelController) -> CGFloat {
@@ -127,6 +134,7 @@ public class FloatingPanelDefaultBehavior: FloatingPanelBehavior {
     public func interactionAnimator(_ fpc: FloatingPanelController, to targetPosition: FloatingPanelPosition, with velocity: CGVector) -> UIViewPropertyAnimator {
         let timing = timeingCurve(with: velocity)
         let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timing)
+        animator.isInterruptible = false
         return animator
     }
 
